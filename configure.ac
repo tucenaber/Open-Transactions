@@ -221,6 +221,18 @@ if (test "x$release" == x"true"); then
 	["-Wall -D_FORTIFY_SOURCE=2 -fstack-protector-all -fstack-check -Wstack-protector"])
 fi
 
+## (Option) Use test password without prompt ##
+
+AH_TEMPLATE([OT_TEST_PASSWORD])
+
+AC_ARG_ENABLE(
+	[testpass],
+	[AS_HELP_STRING([--enable-testpass], [Use test password without asking the user])],
+	[ if (test "x$enableval" == "xyes"); then
+		AC_DEFINE([OT_TEST_PASSWORD], [])
+	  fi
+	])
+
 ## (Option) Add SWIG JAVA ##
 
 AC_ARG_WITH(
