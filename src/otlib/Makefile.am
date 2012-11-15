@@ -11,6 +11,7 @@ common_includes		=	-I$(opentxs_include_dir)		\
 				-I$(opentxs_include_dir)/otlib		\
 				-I$(opentxs_include_dir)/containers	\
 				$(DEPS_CFLAGS)				\
+				-fprofile-arcs -ftest-coverage \
 				-DOT_PREFIX_PATH="\"${prefix}\""
 
 
@@ -28,7 +29,8 @@ libot_la_CPPFLAGS	=	$(common_includes)
 libot_la_LIBADD		=	bigint/libbigint.la		\
 				irrxml/libirrxml.la		\
 				lucre/liblucre.la		\
-				$(DEPS_LIBS)
+				$(DEPS_LIBS) \
+				-lgcov
 
 libot_la_DEPENDENCIES	=	bigint/libbigint.la		\
 				irrxml/libirrxml.la		\

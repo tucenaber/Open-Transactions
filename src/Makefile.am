@@ -1,4 +1,4 @@
-SUBDIRS			=	otlib otapi
+SUBDIRS			=	otlib otapi unittests unittestboost
 
 opentxs_include_dir	=	$(top_srcdir)/include
 opentxs_source_dir	=	$(top_srcdir)/src
@@ -60,7 +60,6 @@ otserver_CXXFLAGS	+=	-DOT_ZMQ_MODE
 createmint_CXXFLAGS	+=	-DOT_ZMQ_MODE
 endif
 
-
 ####	OT
 
 ot_sources_dir		= 	$(opentxs_source_dir)/otd
@@ -94,3 +93,4 @@ otserver_sources	=	ots/OTClientConnection.cpp		\
 createmint_sources_dir	=	$(opentxs_source_dir)/otmint
 
 createmint_sources	=	otmint/main.cpp
+

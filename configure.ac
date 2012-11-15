@@ -72,6 +72,7 @@ PKG_CHECK_MODULES([OPENSSL],[openssl >= 1.0.0],
 
 AX_BOOST_BASE([1.25.0])
 AX_BOOST_THREAD
+AX_BOOST_UNIT_TEST_FRAMEWORK
 
 ## MsgPack ##
 
@@ -221,18 +222,6 @@ if (test "x$release" == x"true"); then
 	["-Wall -D_FORTIFY_SOURCE=2 -fstack-protector-all -fstack-check -Wstack-protector"])
 fi
 
-## (Option) Use test password without prompt ##
-
-AH_TEMPLATE([OT_TEST_PASSWORD])
-
-AC_ARG_ENABLE(
-	[testpass],
-	[AS_HELP_STRING([--enable-testpass], [Use test password without asking the user])],
-	[ if (test "x$enableval" == "xyes"); then
-		AC_DEFINE([OT_TEST_PASSWORD], [])
-	  fi
-	])
-
 ## (Option) Add SWIG JAVA ##
 
 AC_ARG_WITH(
@@ -334,7 +323,7 @@ AC_SUBST(	[DEPS_CFLAGS],
 ["$PKGS_CFLAGS $ZMQ_CFLAGS $KRG_CFLAGS $OPENSSL_CFLAGS $BOOST_CPPFLAGS $PTHREAD_CFLAGS"])
 
 AC_SUBST(	[DEPS_LIBS],
-["$PKGS_LIBS $ZMQ_LIBS $MSG_LIBS $KRG_LIBS $OPENSSL_LDFLAGS $OPENSSL_LIBS -ldl $BOOST_LDFLAGS $BOOST_THREAD_LIB $PTHREAD_LIBS"])
+["$PKGS_LIBS $ZMQ_LIBS $MSG_LIBS $KRG_LIBS $OPENSSL_LDFLAGS $OPENSSL_LIBS -ldl $BOOST_LDFLAGS $BOOST_THREAD_LIB $PTHREAD_LIBS $BOOST_UNIT_TEST_FRAMEWORK_LIB"])
 
 AC_CONFIG_FILES([Makefile
 			src/otlib/bigint/Makefile
@@ -342,6 +331,8 @@ AC_CONFIG_FILES([Makefile
 			src/otlib/lucre/Makefile
 			src/otlib/Makefile
 			src/otapi/Makefile
+			src/unittests/Makefile
+			src/unittestboost/Makefile
 			src/Makefile
 			src/opentxs.pc])
 

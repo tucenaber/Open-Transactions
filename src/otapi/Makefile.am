@@ -16,7 +16,8 @@ otlib_build_dir		=	$(top_builddir)/src/otlib
 common_includes		=	-I$(opentxs_include_dir)		\
 				-I$(opentxs_include_dir)/otlib		\
 				-I$(opentxs_include_dir)/otapi		\
-				$(DEPS_CFLAGS)
+				$(DEPS_CFLAGS) \
+				-fprofile-arcs -ftest-coverage
 
 AM_CPPFLAGS		= 	$(AC_CXXFLAGS)
 AM_CXXFLAGS		=	$(AC_CXXFLAGS)
@@ -28,7 +29,7 @@ libotapi_la_SOURCES		=	$(otapi_sources) $(otapi_headers)	\
 
 libotapi_la_CXXFLAGS		=	$(common_includes) -fpic
 
-libotapi_la_LIBADD		=	$(otlib_build_dir)/libot.la $(DEPS_LIBS)
+libotapi_la_LIBADD		=	$(otlib_build_dir)/libot.la $(DEPS_LIBS) -lgcov
 libotapi_la_DEPENDENCIES	=	$(otlib_build_dir)/libot.la
 
 libotapi_la_LDFLAGS		=	--no-undefined
