@@ -155,7 +155,12 @@ class OTString;
 //typedef std::map<std::string, OTPseudonym *>		mapOfNyms; // in OTContract.h now.
 typedef std::map<std::string, OTServerContract *>	mapOfServers;
 
-class OTWallet
+struct IWallet
+{
+	virtual bool LoadWallet(const char * szFilename) = 0;
+};
+
+class OTWallet : public IWallet
 {
 private:
 	mapOfNyms		 m_mapNyms;
@@ -247,7 +252,7 @@ EXPORT	void AddPendingWithdrawal(const OTPurse & thePurse);
         void RemovePendingWithdrawal();
         inline OTPurse * GetPendingWithdrawal() const { return m_pWithdrawalPurse; }
     // --------------------------------------------------------
-EXPORT	bool LoadWallet(const char * szFilename);
+EXPORT	virtual bool LoadWallet(const char * szFilename);
 EXPORT	bool SaveWallet(const char * szFilename=NULL);
         bool SaveContract(OTString & strContract); // For saving the wallet to a string.
 
